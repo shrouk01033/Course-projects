@@ -11,19 +11,23 @@ trials = Word_length+2
 print('Hint: fruit')
 while trials > 0:
     print(''.join(secret))
-    guess = input('Your guess: ')
+    guess = input('Your guess: ').lower()
+    guess = guess.strip()
     
-    if guess in word:
-        for i , letter in enumerate(word):
-            if guess == letter:
-                secret[i] = guess
-    if '-' not in secret:
-        print(''.join(secret))
-        print('You win!🎉')
-        break           
-    else:
-        trials-=1
-        if trials == 0:
-            print(f'Game over! The word was {word} ☑️')
+    if guess.isalpha() and len(guess)==1:
+        if guess in word :
+            for i , letter in enumerate(word):
+                if guess == letter:
+                    secret[i] = guess
+            if '-' not in secret:
+                print(''.join(secret))
+                print('You win!🎉')
+                break 
         else:
-            print(f'{trials} chances left!⌛')
+            trials-=1
+            if trials == 0:
+                print(f'Game over! The word was {word} ☑️')
+            else:
+                print(f'{trials} chances left!⌛')
+    else:
+        print('invalid guess, make sure your guess is letter')
